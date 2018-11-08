@@ -1,0 +1,68 @@
+{layout name="public/layout_a"/}
+
+{load href="/static/css/search.css" /}
+<style>
+    textarea {
+        resize: none;
+        outline: none;
+        width: 100%;
+        height: 120px;
+        padding: 5px;
+    }
+    textarea:focus{
+        border-color: #1E9FFF;
+        transition: border-color 1s;
+    }
+</style>
+<h1 class="logo-right hidden-xs margin-bottom-60">加密解密</h1>
+<div class="tm-right-inner-container">
+
+    <div class="clear-both"></div>
+    <div class="row margin-bottom-20">
+        <div class="col-sm-12 col-md-12 margin-bottom-20">
+            <textarea name="" id="input" placeholder="输入内容"></textarea>
+        </div>
+        <div class="col-sm-12 col-md-12 margin-bottom-20">
+            <input type="radio" name="mi-name" value="md5" checked> MD5
+            <input type="radio" name="mi-name" value="base64"> BASE64
+            <input type="radio" name="mi-name" value="url"> URL
+            <hr style="margin-top: 10px;margin-bottom: 15px;">
+            <input type="submit" id="mi-encode" value="加密">
+            <input type="submit" id="mi-decode" value="解密">
+        </div>
+        <div class="col-sm-12 col-md-12 margin-bottom-20">
+            <textarea name="" id="output" readonly placeholder="输出内容"></textarea>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 加密
+    $("#mi-encode").click(function () {
+        // $("#output").val("");
+        var input = $("#input").val();
+        var name = $("input[name='mi-name']:checked").val();
+        var data = {'type': "encode", "input": input, "name": name};
+        $.post("/tool/miRun", data, function (data) {
+            if (data.code === 0) {
+                $("#output").val(data.data.content);
+            } else {
+                alert(data.msg);
+            }
+        })
+    });
+    // 解密
+    $("#mi-decode").click(function () {
+        // $("#output").val("");
+        var input = $("#input").val();
+        var name = $("input[name='mi-name']:checked").val();
+        var data = {'type': "decode", "input": input, "name": name};
+        $.post("/tool/miRun", data, function (data) {
+            if (data.code === 0) {
+                $("#output").val(data.data.content);
+            } else {
+                alert(data.msg);
+            }
+        })
+    });
+</script>

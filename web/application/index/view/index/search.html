@@ -1,0 +1,41 @@
+{layout name="public/layout_a"/}
+{load href="/static/css/search.css" /}
+<h1 class="logo-right hidden-xs margin-bottom-60">搜索</h1>
+<div class="tm-right-inner-container">
+    <div class="row margin-bottom-20">
+        <div class="col-sm-12 col-md-12">
+            <div class="bg-search">
+                <form action="/search" method="get">
+                    <input class="search-input" name="key" placeholder="请输入搜索内容" >
+                    <input class="search-submit" type="submit" value="搜索一下">
+                </form>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+
+    <div class="clear-both"></div>
+    {neq name="$key" value=""}
+    <p style="color: #999;font-size: 14px">以下为您搜索 "<span style="color: red">{$key}</span>" 的结果：</p>
+    <hr>
+    {/neq}
+
+
+    {volist name="data" id="vo"}
+    <article>
+        <a href="/article/{$vo.art_id}" style="color: #0D3349; text-decoration: none"><h2>{$vo.title}</h2></a>
+        <p>{$vo.desc}</p>
+        <div>
+            <div class="intro float-left" style="color: #8C8C8C">
+                <span><i class="fa fa-calendar-o fa-medium"></i> {$vo.atime|date="Y-m-d H:i:s",###}</span>
+            </div>
+            <div class="detail float-right">
+                <a href="/article/{$vo.art_id}" class="btn btn-warning">查看详情</a>
+            </div>
+        </div>
+        <div class="clear-both"></div>
+    </article>
+    <hr>
+    {/volist}
+
+</div>

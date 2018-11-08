@@ -1,0 +1,22 @@
+{layout name="public/layout_a"/}
+<style>
+    .detail blockquote {
+        padding: 5px;
+    !important;
+    }
+</style>
+
+<h1 class="logo-right hidden-xs margin-bottom-60">Detail</h1>
+<div class="tm-right-inner-container">
+    <h1 class="templatemo-header">{$article.title}</h1>
+    <article class="">
+        <div class="info margin-bottom-10" style="color: #8C8C8C">
+            <span><i class="fa fa-calendar-o fa-medium"></i> {$article.atime|date="Y-m-d H:i:s",###}</span>
+            <span style="padding-left: 10px;"><i class="fa fa-eye fa-medium"></i> {$article.views}</span>
+        </div>
+        <hr>
+        <div class="detail" id="content" style="padding: 0;">
+            {$article.content}
+        </div>
+    </article>
+</div>

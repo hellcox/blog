@@ -1,0 +1,66 @@
+{layout name="public/layout_a"/}
+<style>
+.c2{
+    text-align: center;
+    overflow: hidden;
+}
+</style>
+
+<h1 class="logo-right hidden-xs margin-bottom-20">首页</h1>
+<div class="tm-right-inner-container">
+    <div class="clear-both"></div>
+
+    {volist name="data" id="vo"}
+    <article>
+        <a href="/article/{$vo.art_id}" style="color: #0D3349; text-decoration: none"><h2>{$vo.title}</h2></a>
+        <p>{$vo.desc}</p>
+        <div>
+            <div class="intro float-left" style="color: #8C8C8C">
+                <span><i class="fa fa-calendar-o fa-medium"></i> {$vo.atime|date="Y-m-d H:i:s",###}</span>
+            </div>
+            <div class="detail float-right">
+                <a href="/article/{$vo.art_id}" class="btn btn-warning">查看详情</a>
+            </div>
+        </div>
+        <div class="clear-both"></div>
+    </article>
+    <hr>
+    {/volist}
+
+    <div class="bg-page">
+        {$page}
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="tool-card c2">
+                <a href="/new">最新发布</a>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="tool-card c2">
+                <a href="/update">最近更新</a>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="tool-card c2">
+                <a href="/search">搜索一下</a>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="tool-card c2">
+                <a href="/tools">常用工具</a>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="tool-card c2">
+                <a href="/about">关于作者</a>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+            <div class="tool-card c2">
+                <a href="/">友情链接</a>
+            </div>
+        </div>
+    </div>
+</div>
