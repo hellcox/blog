@@ -2,125 +2,155 @@
 
 namespace app\index\controller;
 
-use lib\Tools;
-use app\index\model\Article;
-use think\Request;
 
-class Index extends Base
+use app\index\model\User;
+use think\Controller;
+use think\Db;
+use think\facade\Config;
+use think\facade\Env;
+
+class Index extends Controller
 {
-    /**
-     * 首页
-     * @return mixed
-     */
     public function index()
     {
-        $artModel = new Article();
-        $page = intval(input('page')) == 0 ? 1 : intval(input('page'));
-        $conf['page'] = $page;
-        $conf['size'] = 5;
-
-        $list = $artModel->newList($conf);
-        $data = $list->toArray();
-
-        $this->data['data'] = $data['data'];
-        $this->data['page'] = Tools::pager($data, '/new/');
-        return $this->fetch('index', $this->data);
+        return $this->fetch();
     }
 
-    /**
-     * 最新发布
-     * @return mixed
-     */
-    public function new()
+    public function hello($name = 'ThinkPHP5')
     {
-        $artModel = new Article();
-        $page = intval(input('page')) == 0 ? 1 : intval(input('page'));
-        $conf['page'] = $page;
-        $conf['size'] = 5;
+        return 'hello,' . $name;
+    }
 
-        $list = $artModel->newList($conf);
-        $data = $list->toArray();
-
-        $this->data['data'] = $data['data'];
-        $this->data['page'] = Tools::pager($data, '/new/');
-        return $this->fetch('new', $this->data);
+    public function test()
+    {
+        echo Config::get('default_lang');
+        echo '<br>';
+        echo Env::get('app_path');
     }
 
     /**
-     * 文章详情页
-     * @return mixed
+     * @route('sort')
+     */
+    public function sort()
+    {
+        echo '<pre>';
+        $arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        print_r($arr);
+        shuffle($arr);
+        print_r($arr);
+
+    }
+
+    /**
+     * @route('adduser')
+     */
+    public function addUser()
+    {
+
+        $data = [
+            'nick_name' => time(),
+            'login_name' => time(),
+            'password' => 'password',
+            'age' => 20,
+            'add_date' => date('Y-m-d H:i:s')
+        ];
+        $user = new User($data);
+        $user->save();
+
+        dump($user);
+    }
+
+    /**
+     * @route('getuser')
+     */
+    public function getUser()
+    {
+        $id = 11;
+
+        $user1 = User::get($id);
+        dump($user1);
+
+        $user2 = User::where(['id' => $id])->find();
+        dump($user2);
+
+        $user3 = Db::name('user')->where(['id' => $id])->find();
+        dump($user3);
+    }
+
+    /**
+     * @route('listuser')
+     */
+    public function listUser()
+    {
+
+        $users1 = User::all();
+        dump($users1);
+
+        $users2 = User::where('id', '>', 11)->where(['password' => 'password'])->select();
+        dump($users2);
+    }
+
+    /**
+     * @route('json')
+     */
+    public function json()
+    {
+        $arr = [1, 2, 3, 4, 5, 6];
+
+        $data[] = 1;
+        $data[] = 2;
+        $data[] = 3;
+        $data[] = 4;
+        $data[] = 5;
+        $data[] = 6;
+        $data[] = $arr;
+
+        echo json_encode($data);
+
+    }
+
+    /**
+     * @route('view')
+     */
+    public function view()
+    {
+        return $this->fetch('test');
+    }
+
+    /**
+     * @route('page')
+     */
+    public function page()
+    {
+        $list = User::where("age", 20)->paginate(10, false);
+        $page = $list->render();
+
+        $this->assign('list', $list);
+        $this->assign('page', $page);
+        return $this->fetch();
+    }
+
+    /**
+     * @route('editor')
+     */
+    public function editor()
+    {
+        return $this->fetch();
+    }
+
+    /**
+     * @route('boot')
+     */
+    public function boot()
+    {
+        return $this->fetch();
+    }
+
+    /**
+     * @route('detail')
      */
     public function detail()
     {
-        $id = intval(input('id'));
-        $model = new Article();
-        $data = $model->getOneByid($id);
-        $model->addViews($id);
-
-        $this->data['article'] = $data;
-        $this->data['title'] = $data['title'] . " - 小豆豆博客";
-        $this->data['keywords'] = $data['key_words'];
-        $this->data['description'] = $data['desc'];
-        return $this->fetch('detail', $this->data);
-    }
-
-    /**
-     * 最近修改
-     * @return mixed
-     */
-    public function update()
-    {
-        $artModel = new Article();
-        $page = intval(input('page')) == 0 ? 1 : intval(input('page'));
-        $conf['page'] = $page;
-        $conf['size'] = 5;
-
-        $list = $artModel->updateList($conf);
-        $data = $list->toArray();
-
-        $this->data['data'] = $data['data'];
-        $this->data['page'] = Tools::pager($data, '/update/');
-        return $this->fetch('update', $this->data);
-    }
-
-    /**
-     * 关于作者
-     * @return mixed
-     */
-    public function about()
-    {
-        $runtime = time() - 1533052800;
-        $runStr = Tools::secondToDay($runtime);
-        $this->data['runtime'] = $runStr;
-        return $this->fetch('about', $this->data);
-    }
-
-    /**
-     * 搜索一下
-     * @return mixed
-     */
-    public function search()
-    {
-        $key = input('key');
-        if (empty($key)) {
-            $this->data['data'] = [];
-        } else {
-            $model = new Article();
-            $conf['key'] = $key;
-            $data = $model->searchList($conf);
-            $this->data['data'] = $data;
-        }
-        $resData['key'] = $key;
-        $this->data['key'] = $key;
-        return $this->fetch('search', $this->data);
-    }
-
-    /**
-     * 工具集合
-     * @return mixed
-     */
-    public function tool()
-    {
-        return $this->fetch('tool', $this->data);
+        return $this->fetch();
     }
 }
