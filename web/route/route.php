@@ -17,8 +17,10 @@ Route::get('hello/:name', 'index/hello');
 
 
 // Index
-// Route::rule('test','index/test');
-// Route::rule('sort','index/sort');
+Route::rule('','index/index');
+Route::rule('detail','index/detail');
+Route::rule('new','index/latest');
+Route::rule('test','index/test');
 
 return [
 
