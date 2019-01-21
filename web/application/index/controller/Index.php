@@ -5,6 +5,7 @@ namespace app\index\controller;
 
 use app\index\model\Article;
 use think\Controller;
+use think\facade\Request;
 
 class Index extends Controller
 {
@@ -20,29 +21,31 @@ class Index extends Controller
         return $this->fetch('home');
     }
 
-    /**
-     * 测试方法
-     */
     public function test()
     {
         echo "test";
         echo "<br><a href='" . url('/') . "'>home</a>";
+        return $this->fetch('detailBak');
     }
-
-    /**
-     * 最新列表
-     */
-    public function latest()
-    {
-        echo 1;
-    }
-
 
     public function detail()
     {
-        $id = intval($_GET['id']);
-        $article = Article::get($id);
+        $id = Request::param('uuid');
+        if (empty($id)) {
+            $id = intval($_GET['id']);
+        }
+        $article = Article::get(['uuid' => $id, 'status' => 1]);
+
+        // 浏览量+1
+        $article['views'] = $article['views'] + 1;
+        $article->save();
+
         $this->assign('article', $article);
+        return $this->fetch();
+    }
+
+    public function tools()
+    {
         return $this->fetch();
     }
 }

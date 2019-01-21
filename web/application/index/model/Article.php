@@ -20,4 +20,9 @@ class Article extends Model
         return $list;
     }
 
+    public function getByUuid($uuid){
+        $article = $this->db()->where(['status'=>1,'uuid'=>$uuid])->limit(1);
+        return $article;
+    }
+
 }

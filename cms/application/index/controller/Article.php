@@ -68,6 +68,7 @@ class Article extends BaseController
         }
 
         $data = [
+            'uuid' => time(),
             'title' => $title,
             'keyword' => $keyword,
             'description' => $description,

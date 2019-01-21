@@ -18,9 +18,10 @@ Route::get('hello/:name', 'index/hello');
 
 // Index
 Route::rule('','index/index');
-Route::rule('detail','index/detail');
+Route::rule('detail/:uuid','index/detail');
 Route::rule('new','index/latest');
 Route::rule('test','index/test');
+Route::rule('tools','index/tools');
 
 return [
 

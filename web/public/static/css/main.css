@@ -49,36 +49,38 @@
     overflow: hidden;
 }
 
+.lx-page li:last-child{
+    float: right;
+}
+
 .lx-page ul li {
     display: inline-block;
-}
-
-.lx-page ul li span {
-    display: inline-block;
-    margin: 5px;
-    border: 1px #ccc solid;
-    height: 30px;
-    width: 30px;
-    line-height: 30px;
+    width: 49%;
+    background: #ccc;
     text-align: center;
+    border-radius: 25px;
 }
 
-.lx-page .active span {
-    background: lightskyblue;
-}
-
-.lx-page ul li a {
+.lx-page ul li a{
     display: inline-block;
-    margin: 5px;
-    border: 1px #ccc solid;
-    height: 30px;
-    width: 30px;
-    line-height: 30px;
+    width: 100%;
+    background: #ccc;
     text-align: center;
-}
-
-.lx-page ul li a:hover {
+    border-radius: 20px;
+    text-decoration: none;
     color: #fff;
-    background: #00aaaa;
-    border: 1px #00aaaa solid;
+}
+
+.lx-page ul li a:hover{
+    background: #B7D6EC;
+    color: #999;
+}
+
+.lx-page ul li span{
+    display: inline-block;
+    width: 100%;
+    background: #ccc;
+    text-align: center;
+    border-radius: 25px;
+    color: #fff;
 }
