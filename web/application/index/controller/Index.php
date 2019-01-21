@@ -3,21 +3,20 @@
 namespace app\index\controller;
 
 
-use app\index\model\User;
+use app\index\model\Article;
 use think\Controller;
-use think\Db;
-use think\facade\Config;
-use think\facade\Env;
 
 class Index extends Controller
 {
 
-    /**
-     * 首页
-     * @return mixed
-     */
     public function index()
     {
+        $article = new Article();
+        $list = $article->listAll(null);
+        $page = $list->render();
+
+        $this->assign('list', $list);
+        $this->assign('page', $page);
         return $this->fetch('home');
     }
 
@@ -38,12 +37,12 @@ class Index extends Controller
         echo 1;
     }
 
-    /**
-     * 详情
-     * @return mixed
-     */
+
     public function detail()
     {
+        $id = intval($_GET['id']);
+        $article = Article::get($id);
+        $this->assign('article', $article);
         return $this->fetch();
     }
 }

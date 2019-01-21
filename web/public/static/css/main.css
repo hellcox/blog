@@ -44,3 +44,41 @@
 .pdr-20 {
     padding-right: 20px;
 }
+
+.lx-page {
+    overflow: hidden;
+}
+
+.lx-page ul li {
+    display: inline-block;
+}
+
+.lx-page ul li span {
+    display: inline-block;
+    margin: 5px;
+    border: 1px #ccc solid;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.lx-page .active span {
+    background: lightskyblue;
+}
+
+.lx-page ul li a {
+    display: inline-block;
+    margin: 5px;
+    border: 1px #ccc solid;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.lx-page ul li a:hover {
+    color: #fff;
+    background: #00aaaa;
+    border: 1px #00aaaa solid;
+}

@@ -82,12 +82,13 @@
     });
 
     function add() {
+        var id = "{$article.id}";
         var title = $("#title").val();
         var keyword = $("#keyword").val();
         var description = $("#description").val();
         var content = editor.getHTML();
         var md_content = editor.getMarkdown();
-        var data = {title: title, keyword: keyword, description: description, content: content, md_content: md_content};
+        var data = {id:id,title: title, keyword: keyword, description: description, content: content, md_content: md_content};
         console.log(data);
         $.ajax({
             type: "post",

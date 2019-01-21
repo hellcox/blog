@@ -16,14 +16,15 @@ class Article extends BaseController
 
     public function edit()
     {
-        $article = \app\index\model\Article::get(1);
+        $id = intval($_GET['id']);
+        $article = \app\index\model\Article::get($id);
         $this->assign('article', $article);
         return $this->fetch();
     }
 
     public function doEdit()
     {
-        $id = intval($_GET['id']);
+        $id = intval($_POST['id']);
         $title = $_POST['title'];
         $keyword = $_POST['keyword'];
         $description = $_POST['description'];
