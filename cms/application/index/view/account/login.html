@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    {load href="/static/js/jquery-3.3.1.min.js" /}
+    {load href="/static/plugin/layui/layui.all.js" /}
+</head>
+<body style="align: center">
+<div style="width: 300px; text-align: center;margin: 100px auto">
+    <input type="text" id="login_name" value="admin" style="width: 200px;">
+    <br><br>
+    <input type="password" id="password" value="" placeholder="请输出密码" style="width: 200px;">
+    <br><br>
+    <button onclick="login()" style="width: 100px;">登录</button>
+</div>
+
+<script>
+    function login() {
+        var login_name = $("#login_name").val();
+        var password = $("#password").val();
+        var data = {login_name: login_name, password: password};
+        $.ajax({
+            type: "post",
+            url: "{:url('account/doLogin')}",
+            data: data,
+            success: function (res) {
+                if (res.code == 0) {
+                    layer.msg(res.msg, {time: 1500}, function () {
+                        window.location.href = "{:url('index/index')}";
+                    });
+                } else {
+                    layer.msg(res.msg);
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

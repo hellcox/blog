@@ -75,7 +75,7 @@
             "bold", "del", "italic", "quote", "|",
             "h1", "h2", "h3", "h4", "h5", "h6", "|",
             "link", "image", "code-block", "|",
-            "watch", "preview", "fullscreen", "help"
+            "watch", "preview", "help"
         ],
         simpleBak: [
             "undo", "redo", "|",

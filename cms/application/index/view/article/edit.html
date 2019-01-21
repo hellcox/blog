@@ -11,7 +11,7 @@
 
 <span class="layui-breadcrumb">
       <a href="/">稿件中心</a>
-      <a><cite>新增</cite></a>
+      <a><cite>编辑</cite></a>
 </span>
 
 <!-- 内容主体区域 -->
@@ -21,13 +21,13 @@
         <div class="layui-form-item">
             <label class="layui-form-label">title</label>
             <div class="layui-input-block">
-                <input type="text" name="title" id="title" placeholder="请输入标题" class="layui-input">
+                <input type="text" name="title" id="title" placeholder="请输入标题" class="layui-input" value="{$article.title}">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">keyword</label>
             <div class="layui-input-block">
-                <input type="text" name="keyword" id="keyword" placeholder="请输入标题" class="layui-input">
+                <input type="text" name="keyword" id="keyword" placeholder="请输入标题" class="layui-input" value="{$article.keyword}">
             </div>
         </div>
         <!--<div class="layui-form-item">-->
@@ -41,7 +41,7 @@
         <div class="layui-form-item layui-form-text">
             <!--<label class="layui-form-label">描述</label>-->
             <div class="layui-input-block">
-                <textarea placeholder="请输入描述" name="description" id="description" class="layui-textarea"></textarea>
+                <textarea placeholder="请输入描述" name="description" id="description" class="layui-textarea">{$article.description}</textarea>
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
     </div>
 
     <div id="editormd">
-        <textarea style="display:none;"></textarea>
+        <textarea style="display:none;">{$article.md_content}</textarea>
     </div>
 
     <div style="overflow: hidden">
@@ -88,14 +88,15 @@
         var content = editor.getHTML();
         var md_content = editor.getMarkdown();
         var data = {title: title, keyword: keyword, description: description, content: content, md_content: md_content};
+        console.log(data);
         $.ajax({
             type: "post",
-            url: "{:url('article/doAdd')}",
+            url: "{:url('article/doEdit')}",
             data: data,
             success: function (res) {
                 if (res.code == 0) {
                     layer.msg(res.msg, {time: 1500}, function () {
-                        window.location.href = "{:url('article/index')}";
+                        location.reload();
                     });
                 } else {
                     layer.msg(res.msg);

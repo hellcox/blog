@@ -1,7 +1,7 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">layui 后台布局</div>
+        <div class="layui-logo"><a href="/" style="color: #fff">后台布局</a></div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <!--<ul class="layui-nav layui-layout-left">-->
         <!--<li class="layui-nav-item"><a href="">控制台</a></li>-->
@@ -24,7 +24,7 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
+                    <dd><a href="{:url('account/logout')}">安全退出</a></dd>
                 </dl>
             </li>
             <!--<li class="layui-nav-item"><a href="">退了</a></li>-->
@@ -38,17 +38,9 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">所有内容</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="{:url('article/index')}">列表一</a></dd>
+                        <dd><a href="{:url('article/index')}">稿件中心</a></dd>
                         <dd><a href="javascript:;">列表二</a></dd>
                         <dd><a href="javascript:;">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item  layui-nav-itemed">
-                    <a href="javascript:;">解决方案</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
                         <dd><a href="">超链接</a></dd>
                     </dl>
                 </li>

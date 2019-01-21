@@ -9,7 +9,7 @@ use think\Db;
 use think\facade\Config;
 use think\facade\Env;
 
-class Index extends Controller
+class Index extends BaseController
 {
 
     /**

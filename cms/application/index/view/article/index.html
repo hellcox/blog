@@ -3,64 +3,117 @@
 
 
 <span class="layui-breadcrumb">
-      <a href="/">首页</a>
-      <a href="/">演示</a>
-      <a><cite>导航元素</cite></a>
+      <a href="/">稿件中心</a>
+      <a><cite>列表</cite></a>
     </span>
 
 <!-- 内容主体区域 -->
 <div class="mgt-20">
 
-    <a class="layui-btn layui-btn-sm" href="{:url('article/add')}"><i class="layui-icon"></i></a>
+    <a class="layui-btn layui-btn-sm" href="{:url('article/add')}">&nbsp;<i class="layui-icon"></i></a>
 
     <div class="layui-form">
         <table class="layui-table">
-            <colgroup>
-                <col width="150">
-                <col width="150">
-                <col width="200">
-                <col>
-                <col width="200">
-            </colgroup>
             <thead>
             <tr>
-                <th>人物</th>
-                <th>民族</th>
-                <th>出场时间</th>
-                <th>格言</th>
+                <th>ID</th>
+                <th>标题</th>
+                <th>关键词</th>
+                <th>简介</th>
+                <th>状态</th>
+                <th>创建时间</th>
+                <th>更新时间</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
+            {volist name='list' id='item'}
             <tr>
-                <td>贤心</td>
-                <td>汉族</td>
-                <td>1989-10-14</td>
-                <td>人生似修行</td>
+                <td>{$item.id}</td>
+                <td>{$item.title}</td>
+                <td>{$item.keyword}</td>
+                <td>{$item.description}</td>
+                <td>
+                    <?php if($item['status']==-1):?>
+                    <span class="layui-bg-cyan">删除</span>
+                    <?php elseif($item['status']==0):?>
+                    <span class="layui-bg-red">下线</span>
+                    <?php elseif($item['status']==1):?>
+                    <span class="layui-bg-green">上线</span>
+                    <?php else:?>
+                    <span class="layui-bg-gray">未知</span>
+                    <?php endif;?>
+                </td>
+                <td>{$item.gmt_create}</td>
+                <td>{$item.gmt_update}</td>
                 <td>
                     <div class="layui-btn-group">
-                        <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
-                        <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
-                        <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
+                        <!--<button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>-->
+                        <a class="layui-btn layui-btn-sm" href="{:url('article/edit')}?id={$item.id}">
+                            <i class="layui-icon"></i></a>
+                        <button class="layui-btn layui-btn-sm" onclick="del('{$item.id}')">
+                            <i class="layui-icon"></i>
+                        </button>
+                        <?php if($item['status']==1):?>
+                        <button class="layui-btn layui-btn-sm layui-btn-danger" onclick="online(0,'{$item.id}')">下线
+                        </button>
+                        <?php elseif($item['status']==0):?>
+                        <button class="layui-btn layui-btn-sm" onclick="online(1,'{$item.id}')">上线</button>
+                        <?php endif;?>
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td>Helen Keller</td>
-                <td>拉丁美裔</td>
-                <td>1880-06-27</td>
-                <td> Life is either a daring adventure or nothing.</td>
-                <td>
-                    <div class="layui-btn-group">
-                        <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
-                        <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
-                        <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
-                    </div>
-                </td>
-            </tr>
+            {/volist}
             </tbody>
         </table>
     </div>
+
+    <div class="lx-page">
+        {$list|raw}
+    </div>
+
 </div>
+
+<script>
+    function del(id) {
+        var data = {id: id};
+        layer.confirm("确定删除？", function () {
+            $.ajax({
+                type: "post",
+                url: "{:url('article/delete')}",
+                data: data,
+                success: function (res) {
+                    if (res.code == 0) {
+                        layer.msg(res.msg, {time: 1000}, function () {
+                            location.reload();
+                        });
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                }
+            });
+        });
+    }
+
+    function online(status,id) {
+        var data = {id: id,status:status};
+        layer.confirm("确定上下线操作？", function () {
+            $.ajax({
+                type: "post",
+                url: "{:url('article/online')}",
+                data: data,
+                success: function (res) {
+                    if (res.code == 0) {
+                        layer.msg(res.msg, {time: 1500}, function () {
+                            location.reload();
+                        });
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                }
+            });
+        });
+    }
+</script>
 
 {include file='public/footer' /}
