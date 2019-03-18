@@ -1,18 +1,24 @@
 {include file='public/header' /}
 {include file='public/menu' /}
+{load href="/static/plugin/mdeditor/css/editormd.css" /}
 
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-8">
-            <h4>常用工具</h4>
-            <hr>
-            <div style="overflow: hidden">
-                <a href="{:url('/tool/timestamp')}" style="text-decoration: none;color: #666;text-align: center;">
-                    <h5 style="background: #FEBB50;width: 48%;height: 50px;border-radius: 5px;line-height: 50px;display: inline-block;float: left">时间戳</h5>
-                </a>
-                <a href="" style="text-decoration: none;color: #666;text-align: center;">
-                    <h5 style="background: #B7D6EC;width: 48%;height: 50px;border-radius: 5px;line-height: 50px;display: inline-block;float: right;">时间戳</h5>
-                </a>
+            <h1 class="title" style="font-size: 30px;font-weight: bold">{$article.title}</h1>
+            <div class="info mgt-20" style="color: #666; font-size: 14px;">
+                <span class="pdr-10">{$article.gmt_create}</span>
+                <span class="pdr-10">阅读 ({$article.views})</span>
+            </div>
+            <div class="content mgt-20 mgb-20">
+                <div class="markdown-body editormd-preview-container" style="padding: 0">
+                    <?php echo $article['content'];?>
+                </div>
+            </div>
+
+            <div class="comment">
+                <!--PC和WAP自适应版-->
+                <div id="SOHUCS" sid="{$article.id}"></div>
             </div>
         </div>
         <div class="col-md-4">

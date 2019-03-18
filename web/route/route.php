@@ -22,6 +22,7 @@ Route::rule('detail/:uuid','index/detail');
 Route::rule('new','index/latest');
 Route::rule('test','index/test');
 Route::rule('tools','index/tools');
+Route::rule('tool/timestamp','tool/timestamp');
 
 return [
 
