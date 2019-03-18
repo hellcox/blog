@@ -16,7 +16,10 @@ class Article extends Model
 
     public function listAll($params)
     {
-        $list = $this->db()->order('id','desc')->paginate(10);
+        $list = $this->db()
+            ->where(['status'=>1])
+            ->order('id','desc')
+            ->paginate(10);
         return $list;
     }
 }
