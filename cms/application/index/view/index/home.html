@@ -10,6 +10,11 @@
     <div class="mgt-20">
         <p>内容主体区域</p>
         <hr>
+        <p>{:url('/index/index/uploadFile')}</p>
+        <form action="{:url('/index/upload/ossImage')}" method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="提交">
+        </form>
 
         <p>静态表格:</p>
         <div class="layui-form">

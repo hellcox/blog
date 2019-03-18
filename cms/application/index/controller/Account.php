@@ -8,6 +8,7 @@
 namespace app\index\controller;
 
 
+use lib\ApiResponse;
 use think\Controller;
 use think\Session;
 
@@ -36,14 +37,8 @@ class Account extends Controller
         if ($loginName == 'admin' && $password = '111111') {
             $session = new Session();
             $session->set('user', $loginName);
-            $data['code'] = 0;
-            $data['msg'] = '登录成功';
         }
-
-        header('Content-Type:application/json; charset=utf-8');
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
-        exit;
-
+        ApiResponse::success(0,"登录成功");
     }
 
     public function logout()

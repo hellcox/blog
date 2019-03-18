@@ -25,17 +25,4 @@ class BaseController extends Controller
             exit;
         }
     }
-
-    public function json($code = 0, $msg = "success", $data = "")
-    {
-        header('Content-Type:application/json; charset=utf-8');
-
-        $res['code'] = $code;
-        $res['msg'] = $msg;
-        $res['data'] = $data;
-
-        echo json_encode($res, JSON_UNESCAPED_UNICODE);
-        exit;
-    }
-
 }
