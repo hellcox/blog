@@ -68,7 +68,11 @@
             height: 640,
             saveHTMLToTextarea: true,
             toolbarIcons: "simple",
-            path: "/static/plugin/mdeditor/lib/"
+            path: "/static/plugin/mdeditor/lib/",
+
+            imageUpload : true,
+            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp"],
+            imageUploadURL : "{:url('/index/upload/ossImageMarkdown')}",//注意你后端的上传图片服务地址
         });
 
         layui.upload.render({

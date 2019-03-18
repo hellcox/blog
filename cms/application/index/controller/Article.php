@@ -2,6 +2,8 @@
 
 namespace app\index\controller;
 
+use lib\ApiResponse;
+
 class Article extends BaseController
 {
     public function index()
@@ -32,12 +34,12 @@ class Article extends BaseController
         $md_content = $_POST['md_content'];
 
         if (empty($title) || empty($keyword) || empty($description) || empty($content) || empty($md_content)) {
-            return $this->json(-1, "参数错误");
+            ApiResponse::error(-1, "参数错误");
         }
 
         $article = \app\index\model\Article::get($id);
         if (empty($article)) {
-            $this->json(-1, "稿件不存在");
+            ApiResponse::error(-1, "稿件不存在");
         }
         $article['title'] = $title;
         $article['keyword'] = $keyword;
@@ -46,7 +48,7 @@ class Article extends BaseController
         $article['md_content'] = $md_content;
         $article->save();
 
-        return $this->json(0, "修改成功");
+        ApiResponse::success("修改成功");
     }
 
     public function add()
@@ -64,7 +66,7 @@ class Article extends BaseController
         $md_content = $_POST['md_content'];
 
         if (empty($title) || empty($keyword) || empty($description) || empty($content) || empty($md_content)) {
-            return $this->json(-1, "参数错误");
+            ApiResponse::error(-1, "参数错误");
         }
 
         $data = [
@@ -82,24 +84,24 @@ class Article extends BaseController
         $article = new \app\index\model\Article();
         $article->save($data);
 
-        return $this->json(0, "新增成功");
+        ApiResponse::success("新增成功");
     }
 
     public function delete()
     {
         $id = intval($_POST['id']);
         if (empty($id)) {
-            $this->json(-1, "ID错误");
+            ApiResponse::error(-1, "ID错误");
         }
 
         $article = \app\index\model\Article::get($id);
         if (empty($article)) {
-            $this->json(-1, "稿件不存在");
+            ApiResponse::error(-1, "稿件不存在");
         }
         $article['status'] = -1;
         $article->save();
 
-        $this->json(0, "删除成功");
+        ApiResponse::success("删除成功");
 
     }
 
@@ -108,21 +110,21 @@ class Article extends BaseController
         $id = intval($_POST['id']);
         $status = intval($_POST['status']);
         if (empty($id)) {
-            $this->json(-1, "ID错误");
+            ApiResponse::error(-1, "ID错误");
         }
 
         if (!in_array($status, [0, 1])) {
-            $this->json(-1, "操作错误");
+            ApiResponse::error(-1, "操作错误");
         }
 
         $article = \app\index\model\Article::get($id);
         if (empty($article)) {
-            $this->json(-1, "稿件不存在");
+            ApiResponse::error(-1, "稿件不存在");
         }
         $article['status'] = $status;
         $article->save();
 
-        $this->json(0, "操作成功");
+        ApiResponse::success("操作成功");
 
     }
 }

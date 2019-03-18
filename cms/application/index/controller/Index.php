@@ -4,10 +4,12 @@ namespace app\index\controller;
 
 
 use app\index\model\User;
+use OSS\OssClient;
 use think\Controller;
 use think\Db;
 use think\facade\Config;
 use think\facade\Env;
+use think\Image;
 
 class Index extends BaseController
 {
