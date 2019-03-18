@@ -38,7 +38,7 @@ class Account extends Controller
             $session = new Session();
             $session->set('user', $loginName);
         }
-        ApiResponse::success(0,"登录成功");
+        ApiResponse::success("登录成功");
     }
 
     public function logout()

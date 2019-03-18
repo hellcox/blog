@@ -8,6 +8,7 @@
 namespace app\index\model;
 
 
+use think\Db;
 use think\Model;
 
 class Article extends Model
@@ -17,8 +18,9 @@ class Article extends Model
     public function listAll($params)
     {
         $list = $this->db()
-            ->where(['status'=>1])
-            ->order('id','desc')
+//            ->where(['status' => ['>'=> -1]])
+            ->where('status','>=',0)
+            ->order('id', 'desc')
             ->paginate(10);
         return $list;
     }
