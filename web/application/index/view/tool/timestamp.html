@@ -1,24 +1,31 @@
 {include file='public/header' /}
 {include file='public/menu' /}
-{load href="/static/plugin/mdeditor/css/editormd.css" /}
 
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-8">
-            <h1 class="title" style="font-size: 30px;font-weight: bold">{$article.title}</h1>
-            <div class="info mgt-20" style="color: #666; font-size: 14px;">
-                <span class="pdr-10">{$article.gmt_create}</span>
-                <span class="pdr-10">阅读 ({$article.views})</span>
+            <h4>时间戳</h4>
+            <hr>
+            <div class="mgt-20 mgb-20">
+                <span class="mgb-10">时间戳(秒)：</span>
+                <br>
+                <input type="text" value="{:$data['now']}">
+                <input type="submit" style="padding: 0 10px;" value="转换">
+                <input type="text" value="">
             </div>
-            <div class="content mgt-20 mgb-20">
-                <div class="markdown-body editormd-preview-container" style="padding: 0">
-                    <?php echo $article['content'];?>
-                </div>
+            <div class="mgt-20 mgb-20">
+                <span class="mgb-10">时间戳(毫秒)：</span>
+                <br>
+                <input type="text" value="{:$data['now']}000">
+                <input type="submit" style="padding: 0 10px;" value="转换">
+                <input type="text" value="">
             </div>
-
-            <div class="comment">
-                <!--PC和WAP自适应版-->
-                <div id="SOHUCS" sid="{$article.id}"></div>
+            <div class="mgt-20 mgb-20">
+                <span style="margin-bottom: 10px">北京时间：</span>
+                <br>
+                <input type="text" value="{:$data['nowDate']}">
+                <input type="submit" style="padding: 0 10px;" value="转换">
+                <input type="text" value="">
             </div>
         </div>
         <div class="col-md-4">
@@ -32,6 +39,9 @@
         </div>
     </div>
 </main>
+<script>
+    
+</script>
 
 {load href="/static/plugin/bootstrap/assets/js/vendor/jquery-slim.min.js" /}
 {load href="/static/plugin/bootstrap/dist/js/bootstrap.min.js" /}
