@@ -1,31 +1,59 @@
 {include file='public/header' /}
 {include file='public/menu' /}
-
+<style>
+    .time-input {
+        padding-right: 5px;
+        padding-left: 5px;
+        margin-bottom: 10px;
+        line-height: 30px;
+        height: 30px;
+        border: 1px solid #ccc;
+    }
+    .time-btn{
+        padding-right: 15px;
+        padding-left: 15px;
+        line-height: 30px;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 30px;
+        border: 0;
+        border-radius: 2px;
+        color: #333;
+        font-size: 14px;
+        background: #B7D6EC;
+    }
+    .timestamp{
+        color: orangered;
+    }
+</style>
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-8">
             <h4>时间戳</h4>
             <hr>
             <div class="mgt-20 mgb-20">
-                <span class="mgb-10">时间戳(秒)：</span>
-                <br>
-                <input type="text" value="{:$data['now']}">
-                <input type="submit" style="padding: 0 10px;" value="转换">
-                <input type="text" value="">
+                <span class="mgb-10">当前时间戳(秒)：<span class="timestamp">{:$data['now']}</span></span>
             </div>
             <div class="mgt-20 mgb-20">
-                <span class="mgb-10">时间戳(毫秒)：</span>
+                <span class="mgb-10">时间戳(秒)：</span>
                 <br>
-                <input type="text" value="{:$data['now']}000">
-                <input type="submit" style="padding: 0 10px;" value="转换">
-                <input type="text" value="">
+                <input type="text" class="time-input time1in" value="{:$data['now']}">
+                <input type="submit" class="time-btn" value="转换" onclick="doChange(1)">
+                <input type="text" class="time-input time1out" value="">
             </div>
+            <!--<div class="mgt-20 mgb-20">-->
+            <!--<span class="mgb-10">时间戳(毫秒)：</span>-->
+            <!--<br>-->
+            <!--<input type="text" value="{:$data['now']}000">-->
+            <!--<input type="submit" style="padding: 0 10px;" value="转换">-->
+            <!--<input type="text" value="">-->
+            <!--</div>-->
             <div class="mgt-20 mgb-20">
                 <span style="margin-bottom: 10px">北京时间：</span>
                 <br>
-                <input type="text" value="{:$data['nowDate']}">
-                <input type="submit" style="padding: 0 10px;" value="转换">
-                <input type="text" value="">
+                <input type="text" class="time-input time2in" value="{:$data['nowDate']}">
+                <input type="submit" class="time-btn" value="转换" onclick="doChange(2)">
+                <input type="text" class="time-input time2out" value="">
             </div>
         </div>
         <div class="col-md-4">
@@ -39,10 +67,35 @@
         </div>
     </div>
 </main>
+
+{load href="/static/js/jquery-3.3.1.min.js" /}
 <script>
-    
+    $(function () {
+        setInterval(function(){
+            var timestamp = parseInt($(".timestamp").html());
+            $(".timestamp").html(timestamp+1);
+        },1000);
+    });
+
+    function doChange(type) {
+        var value = null;
+        if(type==1){
+            value = $(".time1in").val();
+            var url = "{:url('/tool/changeTime')}" +"?type="+type +"&value="+value;
+            $.get(url,function (res) {
+                $(".time1out").val(res.data);
+            });
+        }
+
+        if(type==2){
+            value = $(".time2in").val();
+            var url = "{:url('/tool/changeTime')}" +"?type="+type +"&value="+value;
+            $.get(url,function (res) {
+                $(".time2out").val(res.data);
+            });
+        }
+
+    }
 </script>
 
-{load href="/static/plugin/bootstrap/assets/js/vendor/jquery-slim.min.js" /}
-{load href="/static/plugin/bootstrap/dist/js/bootstrap.min.js" /}
 {include file='public/footer' /}

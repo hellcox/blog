@@ -23,6 +23,7 @@ Route::rule('new','index/latest');
 Route::rule('test','index/test');
 Route::rule('tools','index/tools');
 Route::rule('tool/timestamp','tool/timestamp');
+Route::rule('tool/changeTime','tool/changeTime');
 
 return [
 
