@@ -24,6 +24,8 @@ Route::rule('test','index/test');
 Route::rule('tools','index/tools');
 Route::rule('tool/timestamp','tool/timestamp');
 Route::rule('tool/changeTime','tool/changeTime');
+Route::rule('tool/md5','tool/md5');
+Route::rule('tool/encodeMd5','tool/encodeMd5');
 
 return [
 

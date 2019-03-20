@@ -48,4 +48,21 @@ class Tool extends Base
             ApiResponse::success("success",$target);
         }
     }
+
+    public function md5(){
+        return $this->view('tool/md5','tools');
+    }
+
+    public function encodeMd5(){
+        $type = $_REQUEST['type'];
+        $value = $_REQUEST['value'];
+        if(empty($value)){
+            ApiResponse::error(-1,"请输入内容");
+        }
+        $data['bit32'] = md5($value);
+        $data['bigbit32'] = strtoupper($data['bit32']);
+        $data['bit16'] = substr($data['bit32'], 8, 16);
+        $data['bigbit16'] = substr($data['bigbit32'], 8, 16);
+        ApiResponse::success("success",$data);
+    }
 }
