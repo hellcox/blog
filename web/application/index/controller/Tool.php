@@ -56,9 +56,9 @@ class Tool extends Base
     public function encodeMd5(){
         $type = $_REQUEST['type'];
         $value = $_REQUEST['value'];
-        if(empty($value)){
-            ApiResponse::error(-1,"请输入内容");
-        }
+        // if(empty($value)){
+        //     ApiResponse::error(-1,"请输入内容");
+        // }
         $data['bit32'] = md5($value);
         $data['bigbit32'] = strtoupper($data['bit32']);
         $data['bit16'] = substr($data['bit32'], 8, 16);

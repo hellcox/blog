@@ -84,9 +84,9 @@
         var value = null;
         if(type==1){
             value = $("#input").val();
-            if(value==null || value==""){
-                alert("请输入内容");
-            }
+            // if(value==null || value==""){
+            //     alert("请输入内容");
+            // }
             var url = "{:url('/tool/encodeMd5')}" +"?type="+type +"&value="+value;
             $.get(url,function (res) {
                 $("#bit32").val(res.data.bit32);
