@@ -9,10 +9,20 @@
 namespace app\index\controller;
 
 
+use lib\Tools;
+use think\App;
 use think\Controller;
 
 class Base extends Controller
 {
+
+    public function __construct(App $app = null)
+    {
+        parent::__construct($app);
+        $time = Tools::runTimes(time()-strtotime("2018-08-01"));
+        $this->assign('runTimes',$time);
+    }
+
     /**
      * 扩展加载视图 增加头部三要素
      * @param string $template

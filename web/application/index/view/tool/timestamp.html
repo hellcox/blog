@@ -6,15 +6,16 @@
         padding-left: 5px;
         margin-bottom: 10px;
         line-height: 30px;
-        height: 30px;
-        border: 1px solid #ccc;
+        height: 40px;
+        width: 48%;
+        border: 1px solid #999;
+        border-radius: 3px;
+        margin-top: 5px;
     }
     .time-btn{
         padding-right: 15px;
         padding-left: 15px;
         line-height: 30px;
-        margin-left: 10px;
-        margin-right: 10px;
         height: 30px;
         border: 0;
         border-radius: 2px;
@@ -34,26 +35,23 @@
             <div class="mgt-20 mgb-20">
                 <span class="mgb-10">当前时间戳(秒)：<span class="timestamp">{:$data['now']}</span></span>
             </div>
-            <div class="mgt-20 mgb-20">
+            <hr>
+            <div class="mgt-20 mgb-20" style="overflow:hidden;">
                 <span class="mgb-10">时间戳(秒)：</span>
                 <br>
-                <input type="text" class="time-input time1in" value="{:$data['now']}">
+                <input type="text" class="time-input time1in" style="float: left" value="{:$data['now']}">
+                <input type="text" class="time-input time1out" style="float: right;" value="" onclick="this.select()">
+                <br>
                 <input type="submit" class="time-btn" value="转换" onclick="doChange(1)">
-                <input type="text" class="time-input time1out" value="">
             </div>
-            <!--<div class="mgt-20 mgb-20">-->
-            <!--<span class="mgb-10">时间戳(毫秒)：</span>-->
-            <!--<br>-->
-            <!--<input type="text" value="{:$data['now']}000">-->
-            <!--<input type="submit" style="padding: 0 10px;" value="转换">-->
-            <!--<input type="text" value="">-->
-            <!--</div>-->
+
             <div class="mgt-20 mgb-20">
                 <span style="margin-bottom: 10px">北京时间：</span>
                 <br>
-                <input type="text" class="time-input time2in" value="{:$data['nowDate']}">
+                <input type="text" class="time-input time2in" style="float: left" value="{:$data['nowDate']}">
+                <input type="text" class="time-input time2out" style="float: right" value="" onclick="this.select()">
+                <br>
                 <input type="submit" class="time-btn" value="转换" onclick="doChange(2)">
-                <input type="text" class="time-input time2out" value="">
             </div>
         </div>
         <div class="col-md-4">
