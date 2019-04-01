@@ -65,4 +65,26 @@ class Tool extends Base
         $data['bigbit16'] = substr($data['bigbit32'], 8, 16);
         ApiResponse::success("success",$data);
     }
+
+    public function bill(){
+        $bill = new \app\index\model\Bill();
+        $list = $bill->listAll(null);
+        $this->assign('list', $list);
+        return $this->view('tool/bill','tools');
+    }
+
+    public function addBill(){
+        $data['money'] = $_POST['money'];
+        $data['type'] = $_POST['type'];
+        $data['gmt_create'] = $_POST['dateTime'];
+
+        if($data['money']<=0){
+            ApiResponse::error(-1,"金额错误");
+        }
+
+        $bill = new \app\index\model\Bill();
+        $bill->save($data);
+
+        ApiResponse::success("success");
+    }
 }
