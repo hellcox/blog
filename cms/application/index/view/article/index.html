@@ -3,36 +3,25 @@
 
 
 <span class="layui-breadcrumb">
-      <a href="/">稿件中心</a>
-      <a><cite>列表</cite></a>
-    </span>
+    <a href="{:url('article/index')}">稿件中心</a>
+    <a><cite>列表</cite></a>
+    <hr>
+</span>
 
 <!-- 内容主体区域 -->
 <div class="mgt-20">
 
-    <a class="layui-btn layui-btn-sm" href="{:url('article/add')}">&nbsp;<i class="layui-icon"></i></a>
+    <a class="layui-btn layui-btn-sm layui-btn-normal" href="{:url('article/add')}">&nbsp;<i class="layui-icon"></i></a>
 
     <div class="layui-form">
-        <table class="layui-table">
-            <colgroup>
-                <col width="">
-                <col width="">
-                <col width="">
-                <col width="">
-                <col width="150">
-                <col width="150">
-                <col width="70">
-                <col width="200">
-            </colgroup>
+        <table class="layui-table" style="font-size: 12px;">
+
             <thead>
             <tr>
                 <th>ID</th>
                 <th>标题</th>
-                <th>关键词</th>
-                <th>简介</th>
                 <th>创建时间</th>
                 <th>更新时间</th>
-                <th>状态</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -41,34 +30,21 @@
             <tr>
                 <td>{$item.id}</td>
                 <td>{$item.title}</td>
-                <td>{$item.keyword}</td>
-                <td>{$item.description}</td>
                 <td>{$item.gmt_create}</td>
                 <td>{$item.gmt_update}</td>
                 <td>
-                    <?php if($item['status']==-1):?>
-                    <span class="layui-bg-cyan">删除</span>
-                    <?php elseif($item['status']==0):?>
-                    <span class="layui-bg-red">下线</span>
-                    <?php elseif($item['status']==1):?>
-                    <span class="layui-bg-green">上线</span>
-                    <?php else:?>
-                    <span class="layui-bg-gray">未知</span>
-                    <?php endif;?>
-                </td>
-                <td>
                     <div class="layui-btn-group">
                         <!--<button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>-->
-                        <a class="layui-btn layui-btn-sm" href="{:url('article/edit')}?id={$item.id}">
+                        <a class="layui-btn layui-btn-xs" href="{:url('article/edit')}?id={$item.id}">
                             <i class="layui-icon"></i></a>
-                        <button class="layui-btn layui-btn-sm" onclick="del('{$item.id}')">
+                        <button class="layui-btn layui-btn-xs" onclick="del('{$item.id}')">
                             <i class="layui-icon"></i>
                         </button>
                         <?php if($item['status']==1):?>
-                        <button class="layui-btn layui-btn-sm layui-btn-danger" onclick="online(0,'{$item.id}')">下线
+                        <button class="layui-btn layui-btn-xs layui-btn-danger" onclick="online(0,'{$item.id}')">下线
                         </button>
                         <?php elseif($item['status']==0):?>
-                        <button class="layui-btn layui-btn-sm" onclick="online(1,'{$item.id}')">上线</button>
+                        <button class="layui-btn layui-btn-xs" onclick="online(1,'{$item.id}')">上线</button>
                         <?php endif;?>
                     </div>
                 </td>
@@ -105,8 +81,8 @@
         });
     }
 
-    function online(status,id) {
-        var data = {id: id,status:status};
+    function online(status, id) {
+        var data = {id: id, status: status};
         layer.confirm("确定上下线操作？", function () {
             $.ajax({
                 type: "post",

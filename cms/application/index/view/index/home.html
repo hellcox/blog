@@ -2,20 +2,16 @@
 {include file='public/menu' /}
 
 
-    <span class="layui-breadcrumb">
+<span class="layui-breadcrumb">
       <a><cite>首页</cite></a>
     </span>
 
-    <!-- 内容主体区域 -->
-    <div class="mgt-20">
-        <p>内容主体区域</p>
-        <hr>
-        <p>{:url('/index/index/uploadFile')}</p>
-        <form action="{:url('/index/upload/ossImage')}" method="post" enctype="multipart/form-data">
-            <input type="file" name="file">
-            <input type="submit" value="提交">
-        </form>
+<!-- 内容主体区域 -->
+<div class="mgt-20">
+    <p>内容主体区域</p>
 
+    <div>
+        <hr>
         <p>静态表格:</p>
         <div class="layui-form">
             <table class="layui-table">
@@ -49,35 +45,19 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td>张爱玲</td>
-                    <td>汉族</td>
-                    <td>1920-09-30</td>
-                    <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
-                            <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
-                            <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Helen Keller</td>
-                    <td>拉丁美裔</td>
-                    <td>1880-06-27</td>
-                    <td> Life is either a daring adventure or nothing.</td>
-                    <td>
-                        <div class="layui-btn-group">
-                            <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
-                            <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
-                            <button class="layui-btn layui-btn-sm"><i class="layui-icon"></i></button>
-                        </div>
-                    </td>
-                </tr>
                 </tbody>
             </table>
         </div>
     </div>
+
+    <div>
+        <hr>
+        <p>文件上传:</p>
+        <form action="{:url('/index/upload/ossImage')}" method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="提交">
+        </form>
+    </div>
+</div>
 
 {include file='public/footer' /}

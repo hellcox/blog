@@ -21,7 +21,7 @@ Route::rule('','index/index');
 Route::rule('editor','index/editor');
 Route::rule('detail','index/detail');
 Route::rule('new','index/latest');
-Route::rule('test','index/test');
+Route::rule('test','test/test');
 
 return [
 
