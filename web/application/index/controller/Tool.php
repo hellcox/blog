@@ -9,6 +9,7 @@ namespace app\index\controller;
 
 
 use lib\ApiResponse;
+use lib\Date;
 use think\App;
 
 class Tool extends Base
@@ -56,13 +57,36 @@ class Tool extends Base
     public function encodeMd5(){
         $type = $_REQUEST['type'];
         $value = $_REQUEST['value'];
-        // if(empty($value)){
-        //     ApiResponse::error(-1,"请输入内容");
-        // }
         $data['bit32'] = md5($value);
         $data['bigbit32'] = strtoupper($data['bit32']);
         $data['bit16'] = substr($data['bit32'], 8, 16);
         $data['bigbit16'] = substr($data['bigbit32'], 8, 16);
         ApiResponse::success("success",$data);
+    }
+
+    public function bill(){
+        $bill = new \app\index\model\Bill();
+        $list = $bill->listAll(null);
+        $this->assign('list', $list);
+        $this->assign('todayCount',$bill->todayCount());
+        $this->assign('monthCount',$bill->monthCount());
+        $this->assign('lastMonthCount',$bill->lastMonthCount());
+        return $this->view('tool/bill','tools');
+    }
+
+    public function addBill(){
+        $data['money'] = $_POST['money'];
+        $data['type'] = $_POST['type'];
+        $data['gmt_create'] = $_POST['dateTime'];
+        $data['content'] = $_POST['content'];
+
+        if($data['money']<=0){
+            ApiResponse::error(-1,"金额错误");
+        }
+
+        $bill = new \app\index\model\Bill();
+        $bill->save($data);
+
+        ApiResponse::success("success");
     }
 }

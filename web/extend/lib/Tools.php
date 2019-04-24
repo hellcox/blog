@@ -47,7 +47,7 @@ class Tools
             $time = ($time % 60);
         }
         $value["seconds"] = floor($time);
-        $t = "{$value['years']}年{$value['days']}天{$value['hours']}小时{$value['minutes']}分{$value['minutes']}秒";
+        $t = "{$value['years']}年{$value['days']}天{$value['hours']}小时{$value['minutes']}分{$value['seconds']}秒";
         Return $t;
     }
 }

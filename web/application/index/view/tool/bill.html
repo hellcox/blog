@@ -1,0 +1,110 @@
+{include file='public/header' /}
+{include file='public/menu' /}
+<style>
+    .content {
+        padding-right: 5px;
+        padding-left: 5px;
+        margin-bottom: 20px;
+        line-height: 38px;
+        border: 1px solid #ccc;
+        width: 100%;
+        height: 38px;
+    }
+
+    .time-btn {
+        width: 20%;
+        padding-right: 15px;
+        padding-left: 15px;
+        line-height: 30px;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 30px;
+        border: 0;
+        margin-bottom: 15px;
+        border-radius: 2px;
+        color: #333;
+        font-size: 14px;
+        background: #FEBB50;
+    }
+</style>
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h4>单单</h4>
+            <hr>
+            <input type="text" class="content" id="dateTime" value="{:date('Y-m-d H:i:s')}" onfocus="this.blur();"/>
+            <div class="mgb-20" style="text-align: center">
+                <select style="width: 100%;height: 38px;line-height: 38px;background: #fff" id="type">
+                    <option value="其他">其他</option>
+                    <option value="早饭">早饭</option>
+                    <option value="午饭">午饭</option>
+                    <option value="晚饭">晚饭</option>
+                    <option value="购物">购物</option>
+                </select>
+                <br><br>
+                <input type="number" class="content" id="money" placeholder="金额"/>
+                <input type="text" class="content" id="content" value="" placeholder="说明"/>
+                <input type="submit" class="time-btn" value="添加" onclick="addBill()">
+            </div>
+
+            <hr>
+            <div style="color: #666" class="row">
+                <div class="col-md-6">今日：{:$todayCount}</div>
+                <div class="col-md-6">当月：{:$monthCount}</div>
+                <div class="col-md-6">上月：{:$lastMonthCount}</div>
+            </div>
+            <hr>
+
+            <div class="">
+                {volist name='list' id='item'}
+                <p style="border-bottom: 1px #ddd dashed;padding-bottom: 5px;color: #888;font-size: 12px;">
+                    <span style="display: inline-block;padding-right: 10px;">{:$item['gmt_create']}</span>
+                    <span style="display: inline-block">{:$item['type']}<?php if(!empty($item['content'])){echo '：'.$item['content'];}?></span>
+                    <span style="display: inline-block;float: right">{:$item['money']}</span>
+                </p>
+                {/volist}
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="column">
+                <div class="mgb-20" style="height: 50px;background: #FEBB50;border-radius: 5px;"></div>
+                <div class="mgb-20" style="height: 50px;background: #F69281;border-radius: 5px;"></div>
+                <div class="mgb-20" style="height: 50px;background: #F6B890;border-radius: 5px;"></div>
+                <div class="mgb-20" style="height: 50px;background: #C1E4DE;border-radius: 5px;"></div>
+                <div class="mgb-20" style="height: 50px;background: #B7D6EC;border-radius: 5px;"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{load href="/static/js/jquery-3.3.1.min.js" /}
+{load href="/static/plugin/laydate/laydate.js" /}
+{load href="/static/plugin/layer/layer.js" /}
+<script>
+    laydate.render({
+        elem: '#dateTime'
+        , type: 'datetime'
+        ,value: "{:date('Y-m-d H:i:s')}"
+    });
+
+    function addBill() {
+        var money = $("#money").val();
+        var dateTime = $("#dateTime").val();
+        var type = $("#type").val();
+        var content = $("#content").val();
+        var data = {money: money, dateTime: dateTime, type: type, content: content};
+
+        value = $("#input").val();
+        var url = "{:url('/addBill')}";
+        $.post(url, data, function (res) {
+            if (res.code == 0) {
+                window.location.reload();
+            } else {
+                layer.msg(res.msg,{time:1000});
+            }
+        });
+    }
+</script>
+
+{include file='public/footer' /}
