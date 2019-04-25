@@ -18,7 +18,7 @@ class Bill extends Model
     public function listAll($params)
     {
         $list = $this->db()->order('gmt_create', 'desc')->all();
-        return json_decode(json_encode($list), true);;
+        return json_decode(json_encode($list), true);
     }
 
     public function todayCount()
@@ -26,7 +26,7 @@ class Bill extends Model
         $count = $this->where('gmt_create', '>=', Date::dayStartDateTime())
             ->where('gmt_create', '<=', Date::dayEndDateTime())
             ->sum('money');
-        return $count;
+        return round($count,2);
     }
 
     public function monthCount()
@@ -34,7 +34,7 @@ class Bill extends Model
         $count = $this->where('gmt_create', '>=', Date::dayStartDateTime(Date::monthStartDate()))
             ->where('gmt_create', '<=', Date::dayEndDateTime(Date::monthEndDate()))
             ->sum('money');
-        return $count;
+        return round($count,2);
     }
 
     public function lastMonthCount()
@@ -42,7 +42,7 @@ class Bill extends Model
         $count = $this->where('gmt_create', '>=', Date::dayStartDateTime(Date::monthStartDate('-1')))
             ->where('gmt_create', '<=', Date::dayEndDateTime(Date::monthEndDate('-1')))
             ->sum('money');
-        return $count;
+        return round($count,2);
     }
 
 }
