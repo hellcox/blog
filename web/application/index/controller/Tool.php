@@ -89,4 +89,17 @@ class Tool extends Base
 
         ApiResponse::success("success");
     }
+
+    public function ttt(){
+        header('X-Accel-Chareset: utf-8');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=test.zip');
+        header('X-Archive-Files: zip');
+
+        $crc32 = "-";
+        printf("%s %d %s %s\n", $crc32, 488909, '/down/a.png', 'a.png');
+        // printf("%s %d %s %s\n", $crc32, 171144, '/data/log/cms.access.log', '2.log');
+        // printf("%s %d %s %s\n", $crc32, 74, 'down/33a7e45582d2776f1a929baf005c40f2b03ac2f7.png', 'a.png');
+        // printf("%s %d %s %s\n", $crc32, 74, 'down/33a7e45582d2776f1a929baf005c40f2b03ac2f7.png', 'b.png');
+    }
 }

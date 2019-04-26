@@ -26,6 +26,7 @@ Route::rule('tool/timestamp','tool/timestamp');
 Route::rule('tool/changeTime','tool/changeTime');
 Route::rule('tool/md5','tool/md5');
 Route::rule('tool/encodeMd5','tool/encodeMd5');
+Route::rule('tool/ttt','tool/ttt');
 Route::rule('bill','tool/bill');
 Route::rule('addBill','tool/addBill');
 
