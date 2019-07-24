@@ -1,0 +1,2 @@
+<?php die('forbidden'); ?>
+{"appid":"101730152","appkey":"318a9b807e1e87b188d3a088c814fa74","callback":"https://www.iuxiao.com/notify","scope":"get_user_info","errorReport":true,"storageType":"file","host":"localhost","user":"root","password":"root","database":"test"}

@@ -19,8 +19,20 @@
             <!--<input class="form-control mr-sm-2" type="text" placeholder="搜索" aria-label="Search">-->
             <!--<button class="btn btn-outline-dark my-2 my-sm-0" type="submit">搜索</button>-->
             <!--</form>-->
-            <a class="nav-link" style="padding-right: 0;color: #333;font-size: 14px;" target="_blank" href="{:url('/test')}">登录</a>
-            <a class="nav-link" style="padding-right: 0;color: #333;font-size: 14px;" onclick='window.open("http://www.baidu.com")'>登录</a>
+            <!--<a class="nav-link" style="padding-right: 0;color: #333;font-size: 14px;" target="_blank" href="{:url('/test')}">登录</a>-->
+            <a class="nav-link" style="padding-right: 0;color: #333;font-size: 14px;" target="_blank" onclick='toQzoneLogin()'>QQ登录</a>
         </div>
     </div>
 </nav>
+
+<script type="text/javascript">
+    var childWindow;
+
+    function toQzoneLogin() {
+        childWindow = window.open("auth", "TencentLogin", "width=700,height=420,menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1,top=200,left=500");
+    }
+
+    function closeChildWindow() {
+        childWindow.close();
+    }
+</script>
