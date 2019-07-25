@@ -4,28 +4,20 @@ namespace app\index\controller;
 
 
 use QC;
+use think\facade\Session;
 
 class Test extends Base
 {
 
     public function test()
     {
-        return $this->view('index');
-    }
+        @Session::set('test','111');
+        $a = Session::get('test');
+        echo $a;
+        echo '<pre>';
+        var_dump($_SESSION);
 
-    /**
-     * QQ授权登录
-     */
-    public function auth()
-    {
-        require_once "../extend/lib/QQAuth/qqConnectAPI.php";
-        $qc = new QC();
-        $qc->qq_login();
-    }
 
-    public function notify()
-    {
-        echo 1111;
-        print_r($_SERVER);
+       // return $this->view('index');
     }
 }

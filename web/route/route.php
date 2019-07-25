@@ -21,8 +21,6 @@ Route::rule('','index/index');
 Route::rule('detail/:uuid','index/detail');
 Route::rule('new','index/latest');
 Route::rule('test','test/test');
-Route::rule('auth','test/auth');
-Route::rule('notify','test/notify');
 Route::rule('tools','index/tools');
 Route::rule('tool/timestamp','tool/timestamp');
 Route::rule('tool/changeTime','tool/changeTime');
@@ -31,6 +29,9 @@ Route::rule('tool/encodeMd5','tool/encodeMd5');
 Route::rule('tool/ttt','tool/ttt');
 Route::rule('bill','tool/bill');
 Route::rule('addBill','tool/addBill');
+
+Route::rule('auth','Auth/auth');
+Route::rule('notify','Auth/notify');
 
 return [
 
